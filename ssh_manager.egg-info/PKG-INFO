@@ -1,0 +1,7 @@
+Metadata-Version: 2.2
+Name: ssh-manager
+Version: 0.1.6
+Requires-Dist: python-dotenv
+Requires-Dist: questionary
+Requires-Dist: gitpython
+Dynamic: requires-dist
