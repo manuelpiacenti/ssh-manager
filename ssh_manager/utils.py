@@ -1,10 +1,16 @@
+# ssh_manager/utils.py
 import os
 import ipaddress
 from dotenv import load_dotenv
 import questionary
 import re
+import shutil
 
 def load_env():
+    if not os.path.exists(".env") and os.path.exists(".env.example"):
+        shutil.copy(".env.example", ".env")
+        print("📄 .env not found. Copied from .env.example")
+
     load_dotenv()
     return {
         "base_group_dir": os.path.expanduser(os.getenv("base_group_dir", "~/.ssh")),
@@ -13,7 +19,7 @@ def load_env():
         "default_identity_file": os.path.expanduser(os.getenv("default_identity_file", "~/.ssh/id_rsa")),
         "known_groups": os.getenv("known_groups", "default").split(","),
         "known_subgroups": os.getenv("known_subgroups", "default,backbone").split(","),
-        "git_provider": os.getenv("git_provider", "gitlab"),
+        "git_provider": os.getenv("git_provider", "github"),
         "git_repo_url": os.getenv("git_repo_url", "")
     }
 

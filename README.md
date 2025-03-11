@@ -83,16 +83,22 @@ Include ~/.ssh/customerA/.ssh/config  # added by ssh-manager
 ---
 
 ## 📁 Environment Configuration (`.env`)
+You can customize the tool’s behavior via a `.env` file located in the root of the project.
+
+### Default `.env.example` file
+This file is already included in the repository:
 ```dotenv
 base_group_dir=~/.ssh
 default_user=root
 default_port=22
-default_identity_file=~/.ssh/id_rsa.pub
-known_groups=default,customerA,customerB
+default_identity_file=~/.ssh/id_rsa
+known_groups=default
 known_subgroups=default,backbone,server,virtualization,network,vpn
-git_provider=gitlab
-git_repo_url=https://gitlab.com/youruser/ssh-manager.git
+git_provider=github
+git_repo_url=https://github.com/YOUR_USERNAME/ssh-manager.git
 ```
+
+If `.env` is not found, it will automatically be created by copying `.env.example`.
 
 ---
 
