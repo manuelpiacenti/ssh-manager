@@ -17,11 +17,39 @@
 ---
 
 ## 📦 Installation
+
+### 🔧 Standard Installation
 ```bash
 pip install -e .
 ```
-
 Make sure Python ≥3.8 is installed. Dependencies: `questionary`, `python-dotenv`, `gitpython`.
+
+---
+
+## 🐧 Debian/Ubuntu Installation Notes
+If you get the error:
+```
+This environment is externally managed
+```
+Your system restricts pip from installing globally due to PEP 668. Use one of these methods:
+
+### ✅ Option 1: Use a virtual environment (recommended)
+```bash
+python3 -m venv .venv
+source .venv/bin/activate
+pip install -e .
+```
+
+### ✅ Option 2: Use pipx (ideal for CLI tools)
+```bash
+sudo apt install pipx
+pipx install .
+```
+
+### ⚠️ Option 3: Force install (not recommended)
+```bash
+pip install -e . --break-system-packages
+```
 
 ---
 
@@ -59,7 +87,7 @@ Include ~/.ssh/customerA/.ssh/config  # added by ssh-manager
 base_group_dir=~/.ssh
 default_user=root
 default_port=22
-default_identity_file=~/.ssh/id_rsa
+default_identity_file=~/.ssh/id_rsa.pub
 known_groups=default,customerA,customerB
 known_subgroups=default,backbone,server,virtualization,network,vpn
 git_provider=gitlab
