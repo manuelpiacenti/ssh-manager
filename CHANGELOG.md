@@ -2,6 +2,24 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.3.1] - 2025-03-12
+### Fixed
+- Host field is now required, preventing empty or invalid host entries
+- Ctrl+C or ESC during prompts cleanly cancels the host creation
+- Better error handling in list view for malformed config blocks
+
+## [0.3.0] - 2025-03-12
+### Added
+- `-p` command to push all SSH configs to Git (GitHub/GitLab)
+- Reads repo URL from `.env` (git_repo_url)
+- Auto-inits the repo and handles first-time remote setup
+
+## [0.2.2] - 2025-03-12
+### Changed
+- Introduced full semantic versioning (major.minor.patch)
+- Interactive release script: choose to bump major, minor or patch
+- Improved help and version reporting
+
 ## [0.2.1] - 2025-03-12
 ### Added
 - Dynamic version display using importlib.metadata
