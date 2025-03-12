@@ -1,4 +1,12 @@
 # Changelog
+## [0.2.0] - 2025-03-11
+### Added
+- --subgroup filter for `--list`
+- Feedback after add/delete actions
+- Auto-copy of `.env.example` to `.env` on first run
+- Improved CLI help and README
+- Debian/Ubuntu install compatibility
+
 ## [0.1.6] - 2025-03-11
 ### Added
 - --subgroup filter for host listing
