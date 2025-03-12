@@ -91,7 +91,7 @@ This file is already included in the repository:
 base_group_dir=~/.ssh
 default_user=root
 default_port=22
-default_identity_file=~/.ssh/id_rsa
+default_identity_file=~/.ssh/id_rsa.pub
 known_groups=default
 known_subgroups=default,backbone,server,virtualization,network,vpn
 git_provider=github
