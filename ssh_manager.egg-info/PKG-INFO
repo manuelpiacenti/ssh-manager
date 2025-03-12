@@ -1,6 +1,6 @@
 Metadata-Version: 2.2
 Name: ssh-manager
-Version: 0.1.6
+Version: 0.1.8
 License-File: LICENSE
 Requires-Dist: python-dotenv
 Requires-Dist: questionary
