@@ -1,6 +1,3 @@
-> **Latest version:** v0.2.1 – Released on 2025-03-12  
-> See [CHANGELOG.md](./CHANGELOG.md) for full details.
-
 # ssh-manager
 
 `ssh-manager` is a command-line tool to manage SSH host configurations organized by group and subgroup. Ideal for IT professionals, sysadmins, and MSPs who work with many environments and clients.

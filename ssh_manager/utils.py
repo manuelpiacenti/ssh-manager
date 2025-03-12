@@ -35,14 +35,23 @@ def validate_ip_or_fqdn(value):
             return True
     return "Please enter a valid IP address or FQDN."
 
+def ask_or_exit(question):
+    answer = question.ask()
+    if answer is None:
+        print("\n❌ Operation cancelled by user.")
+        raise SystemExit
+    return answer
+
 def prompt_host_data(env):
     try:
-        hostname = questionary.text("Host alias name?").ask()
-        ip = questionary.text("IP address or FQDN?", validate=validate_ip_or_fqdn).ask()
-        port = questionary.text("SSH Port?", default=env["default_port"]).ask()
-        identity = questionary.text("SSH key path?", default=env["default_identity_file"]).ask()
-        group = questionary.select("Select group:", choices=env["known_groups"]).ask()
-        subgroup = questionary.select("Select subgroup:", choices=env["known_subgroups"]).ask()
+        hostname = ask_or_exit(
+        questionary.text("Hostname:", validate=lambda val: True if val.strip() else "This field is required.")
+        )
+        ip = ask_or_exit(questionary.text("IP address or FQDN:", validate=validate_ip_or_fqdn))
+        port = ask_or_exit(questionary.text("SSH Port:", default=env["default_port"]))
+        identity = ask_or_exit(questionary.text("SSH key path:", default=env["default_identity_file"]))
+        group = ask_or_exit(questionary.select("Select group:", choices=env["known_groups"]))
+        subgroup = ask_or_exit(questionary.select("Select subgroup:", choices=env["known_subgroups"]))
 
         return {
             "host": hostname,
