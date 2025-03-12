@@ -91,37 +91,38 @@ class ConfigHandler:
 
         print(f"✅ Host '{data['host']}' added to group '{data['group']}' / subgroup '{data['subgroup']}'")
 
-    def delete_host(self, hostname):
-        base = Path(self.env['base_group_dir']).expanduser()
-        found = False
-        for path in base.rglob("config"):
-            blocks = self._load_hosts(path)
-            changed = False
-            for k in list(blocks.keys()):
-                new_entries = []
-                for entry in blocks[k]:
-                    if not entry.strip().startswith(f"Host {hostname}"):
-                        new_entries.append(entry)
-                    else:
-                        changed = True
-                        found = True
-                blocks[k] = new_entries
-            if changed:
-                self._write_hosts(path, blocks)
-        if found:
-            print(f"🗑️  Host '{hostname}' deleted")
+    def delete_host(self, hostname, group):
+        config_path = self._get_config_path(group)
+        blocks = self._load_hosts(config_path)
+        changed = False
+        for k in list(blocks.keys()):
+            new_entries = []
+            for entry in blocks[k]:
+                if not entry.strip().startswith(f"Host {hostname}"):
+                    new_entries.append(entry)
+                else:
+                    changed = True
+            blocks[k] = new_entries
+        if changed:
+            self._write_hosts(config_path, blocks)
+            print(f"🗑️  Host '{hostname}' deleted from group '{group}'")
         else:
-            print(f"⚠️  Host '{hostname}' not found")
+            print(f"⚠️  Host '{hostname}' not found in group '{group}'")
 
-    def rename_host(self, old, new):
-        base = Path(self.env['base_group_dir']).expanduser()
-        for path in base.rglob("config"):
-            blocks = self._load_hosts(path)
-            for k in blocks:
-                for i, entry in enumerate(blocks[k]):
-                    if entry.strip().startswith(f"Host {old}"):
-                        blocks[k][i] = entry.replace(f"Host {old}", f"Host {new}")
-            self._write_hosts(path, blocks)
+    def rename_host(self, old, new, group):
+        config_path = self._get_config_path(group)
+        blocks = self._load_hosts(config_path)
+        renamed = False
+        for k in blocks:
+            for i, entry in enumerate(blocks[k]):
+                if entry.strip().startswith(f"Host {old}"):
+                    blocks[k][i] = entry.replace(f"Host {old}", f"Host {new}")
+                    renamed = True
+        if renamed:
+            self._write_hosts(config_path, blocks)
+            print(f"✏️  Host '{old}' renamed to '{new}' in group '{group}'")
+        else:
+            print(f"⚠️  Host '{old}' not found in group '{group}'")
 
     def move_host(self, hostname, from_path, to_path):
         from_group, from_sub = from_path.split("/")

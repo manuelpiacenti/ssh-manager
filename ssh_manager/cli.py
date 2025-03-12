@@ -2,6 +2,7 @@
 import questionary
 import sys
 import argparse
+from importlib.metadata import version
 from ssh_manager.core import SSHManager
 
 def main():
@@ -11,8 +12,8 @@ def main():
         epilog="""
 Examples:
   ssh-manager -a
-  ssh-manager -d hostname
-  ssh-manager -r old new
+  ssh-manager -d hostname group
+  ssh-manager -r old new group
   ssh-manager -m host from_group/sub to_group/sub
   ssh-manager -l customerA --subgroup server
 """,
@@ -21,9 +22,18 @@ Examples:
 
     action_group = parser.add_argument_group("Host actions")
     action_group.add_argument("-a", "--add", action="store_true", help="Add a new host")
-    action_group.add_argument("-d", "--delete", metavar="HOSTNAME", help="Delete a host")
-    action_group.add_argument("-r", "--rename", nargs=2, metavar=("OLD", "NEW"), help="Rename a host")
-    action_group.add_argument("-m", "--move", nargs=3, metavar=("HOST", "FROM", "TO"), help="Move host between groups/subgroups")
+    action_group.add_argument(
+        "-d", "--delete", nargs=2, metavar=("HOSTNAME", "GROUP"),
+        help="Delete a host from a specific group"
+    )
+    action_group.add_argument(
+        "-r", "--rename", nargs=3, metavar=("OLD", "NEW", "GROUP"),
+        help="Rename a host in a specific group"
+    )
+    action_group.add_argument(
+        "-m", "--move", nargs=3, metavar=("HOST", "FROM", "TO"),
+        help="Move host between groups/subgroups"
+    )
 
     list_group = parser.add_argument_group("Listing")
     list_group.add_argument("-l", "--list", nargs="?", const="default", metavar="GROUP", help="List hosts in a group")
@@ -34,7 +44,7 @@ Examples:
     export_group.add_argument("-p", "--push", action="store_true", help="Commit and push configs to Git")
 
     meta_group = parser.add_argument_group("General")
-    meta_group.add_argument("-v", "--version", action="version", version="ssh-manager v0.1.5")
+    meta_group.add_argument("-v", "--version", action="version", version=f"ssh-manager v{version('ssh-manager')}")
 
     args = parser.parse_args()
     manager = SSHManager()
@@ -43,9 +53,9 @@ Examples:
         if args.add:
             manager.add_host()
         elif args.delete:
-            manager.delete_host(args.delete)
+            manager.delete_host(args.delete[0], args.delete[1])
         elif args.rename:
-            manager.rename_host(args.rename[0], args.rename[1])
+            manager.rename_host(args.rename[0], args.rename[1], args.rename[2])
         elif args.move:
             manager.move_host(args.move[0], args.move[1], args.move[2])
         elif args.export:
