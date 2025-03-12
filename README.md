@@ -1,5 +1,8 @@
 # ssh-manager
 
+![GitHub release](https://img.shields.io/github/v/release/manuelpiacenti/ssh-manager?include_prereleases&label=Latest%20Version)
+[![License: GPLv3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
+
 `ssh-manager` is a command-line tool to manage SSH host configurations organized by group and subgroup. Ideal for IT professionals, sysadmins, and MSPs who work with many environments and clients.
 
 📦 GitHub Repository: [github.com/manuelpiacenti/ssh-manager](https://github.com/manuelpiacenti/ssh-manager)

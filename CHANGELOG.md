@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.3.2] - 2025-03-12
+### Added
+- Section in README explaining how to upgrade to a newer version via pip or pipx
+- GitHub badges: latest version, license
+- GitHub repo link and contribution note in README
+
 ## [0.3.1] - 2025-03-12
 ### Fixed
 - Host field is now required, preventing empty or invalid host entries
