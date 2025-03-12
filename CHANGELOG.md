@@ -1,4 +1,10 @@
 # Changelog
+## [0.2.1] - 2025-03-12
+### Added
+- Support for dynamic version display via `importlib.metadata`
+- Required `group` parameter for `--delete` and `--rename` to handle host conflicts across groups
+- Updated CLI help and README to reflect new parameters
+
 ## [0.2.0] - 2025-03-11
 ### Added
 - --subgroup filter for `--list`
@@ -7,6 +13,7 @@
 - Improved CLI help and README
 - Debian/Ubuntu install compatibility
 
+y
 ## [0.1.6] - 2025-03-11
 ### Added
 - --subgroup filter for host listing

@@ -1,3 +1,6 @@
+> **Latest version:** v0.2.1 – Released on 2025-03-12  
+> See [CHANGELOG.md](./CHANGELOG.md) for full details.
+
 # ssh-manager
 
 `ssh-manager` is a command-line tool to manage SSH host configurations organized by group and subgroup. Ideal for IT professionals, sysadmins, and MSPs who work with many environments and clients.
@@ -46,6 +49,15 @@ sudo apt install pipx
 pipx install .
 ```
 
+If `ssh-manager` is not found after pipx install, add the following to your `~/.bashrc` or shell config:
+```bash
+export PATH="$HOME/.local/bin:$PATH"
+```
+Then reload:
+```bash
+source ~/.bashrc
+```
+
 ### ⚠️ Option 3: Force install (not recommended)
 ```bash
 pip install -e . --break-system-packages
@@ -91,7 +103,7 @@ This file is already included in the repository:
 base_group_dir=~/.ssh
 default_user=root
 default_port=22
-default_identity_file=~/.ssh/id_rsa.pub
+default_identity_file=~/.ssh/id_rsa
 known_groups=default
 known_subgroups=default,backbone,server,virtualization,network,vpn
 git_provider=github
