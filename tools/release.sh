@@ -6,7 +6,7 @@ set -e
 cd "$(dirname "$0")/.."
 
 # File to update version in
-SETUP_FILE="./tools/setup.py"
+SETUP_FILE="./setup.py"
 
 # Extract current version
 CURRENT_VERSION=$(grep "version=" $SETUP_FILE | sed -E "s/.*version='([0-9]+)\.([0-9]+)\.([0-9]+)'.*/\1.\2.\3/")
