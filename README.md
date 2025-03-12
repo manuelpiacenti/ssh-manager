@@ -64,15 +64,15 @@ pip install -e . --break-system-packages
 
 ## 🛠️ Usage
 ```bash
-ssh-manager -a                          # Add a new host
-ssh-manager -d hostname                # Delete a host
-ssh-manager -r old new                 # Rename a host
-ssh-manager -m host from to            # Move host from one group/subgroup to another
-ssh-manager -l [group] [--subgroup sg] # List hosts (filter by group and optional subgroup)
-ssh-manager -e                          # Export all SSH config files as .zip
-ssh-manager -p                          # Push configuration to Git
-ssh-manager -h                          # Show help
-ssh-manager -v                          # Show version
+ssh-manager -a                                  # Add a new host
+ssh-manager -d hostname group                  # Delete a host from a specific group
+ssh-manager -r old new group                   # Rename a host in a specific group
+ssh-manager -m host from to                    # Move host from one group/subgroup to another
+ssh-manager -l [group] [--subgroup sg]         # List hosts (filter by group and optional subgroup)
+ssh-manager -e                                  # Export all SSH config files as .zip
+ssh-manager -p                                  # Push configuration to Git
+ssh-manager -h                                  # Show help
+ssh-manager -v                                  # Show version
 ```
 
 Example structure:
@@ -111,11 +111,26 @@ If `.env` is not found, it will automatically be created by copying `.env.exampl
 
 ---
 
+## 🔄 Uninstallation
+
+### If installed with pip:
+```bash
+pip uninstall ssh-manager
+```
+
+### If installed with pipx:
+```bash
+pipx uninstall ssh-manager
+```
+
+---
+
 ## ℹ️ Notes
 - The `default` group uses `~/.ssh/default/.ssh/config` to avoid polluting the base file
 - You can cancel input with `Ctrl+C`
 - `IdentityFile` is omitted if it matches the default
 - Subgroups are created and separated with `## subgroup_name`
+- Host deletion and renaming require the `group` to avoid conflicts across groups
 
 ---
 
