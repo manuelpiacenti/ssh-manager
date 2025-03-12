@@ -2,17 +2,36 @@
 
 `ssh-manager` is a command-line tool to manage SSH host configurations organized by group and subgroup. Ideal for IT professionals, sysadmins, and MSPs who work with many environments and clients.
 
+📦 GitHub Repository: [github.com/manuelpiacenti/ssh-manager](https://github.com/manuelpiacenti/ssh-manager)
+
+💬 I am available for:
+- 🐛 Bug reports and fixes
+- ✨ New feature implementations
+- 🤝 Collaborations and contributions
+
+Feel free to open issues or pull requests on the repository!
+
 ---
 
-## 🚀 Features
-- Add, delete, rename, and move SSH host entries
-- Organize hosts by group and subgroup (e.g., `customerA/server`)
-- Optionally filter by subgroup with `--subgroup`
-- Automatically writes `Include` directives to `~/.ssh/config`
-- Uses separate SSH config files per group (including `default`)
-- Export all configurations as a `.zip`
-- Push configuration files to a Git repository
-- Fully configurable via `.env`
+## 📁 Environment Configuration (`.env`)
+You can customize the tool’s behavior via a `.env` file located in the root of the project.
+
+### Default `.env.example` file
+This file is already included in the repository:
+```dotenv
+base_group_dir=~/.ssh
+default_user=root
+default_port=22
+default_identity_file=~/.ssh/id_rsa.pub
+known_groups=default
+known_subgroups=default,backbone,server,virtualization,network,vpn
+git_provider=github
+git_repo_url=https://github.com/YOUR_USERNAME/ssh-manager.git
+```
+
+If `.env` is not found, it will automatically be created by copying `.env.example`.
+
+> ℹ️ Modify `.env.example` before running the tool for the first time to ensure your defaults are correctly applied.
 
 ---
 
@@ -23,6 +42,27 @@
 pip install -e .
 ```
 Make sure Python ≥3.8 is installed. Dependencies: `questionary`, `python-dotenv`, `gitpython`.
+
+> 💡 **Tip:** Before installing, it's recommended to review and modify the `.env.example` file with your preferred defaults. This will be automatically copied to `.env` on first use.
+
+---
+
+## 🔄 Update to a new version
+If you’ve previously installed `ssh-manager` and want to upgrade to the latest version:
+
+### If installed with pip:
+```bash
+cd ~/ssh-manager   # or the correct repo path
+git pull origin main
+pip install -e . --upgrade
+```
+
+### If installed with pipx:
+```bash
+cd ~/ssh-manager   # or the correct repo path
+git pull origin main
+pipx reinstall .
+```
 
 ---
 
@@ -88,26 +128,6 @@ Example line in `~/.ssh/config`:
 ```ssh
 Include ~/.ssh/customerA/.ssh/config  # added by ssh-manager
 ```
-
----
-
-## 📁 Environment Configuration (`.env`)
-You can customize the tool’s behavior via a `.env` file located in the root of the project.
-
-### Default `.env.example` file
-This file is already included in the repository:
-```dotenv
-base_group_dir=~/.ssh
-default_user=root
-default_port=22
-default_identity_file=~/.ssh/id_rsa
-known_groups=default
-known_subgroups=default,backbone,server,virtualization,network,vpn
-git_provider=github
-git_repo_url=https://github.com/YOUR_USERNAME/ssh-manager.git
-```
-
-If `.env` is not found, it will automatically be created by copying `.env.example`.
 
 ---
 
