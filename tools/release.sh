@@ -2,8 +2,14 @@
 
 set -e
 
-# Read current version from setup.py
-CURRENT_VERSION=$(grep "version=" setup.py | sed -E "s/.*version='([0-9]+)\.([0-9]+)\.([0-9]+)'.*/\1.\2.\3/")
+# Move to project root
+cd "$(dirname "$0")/.."
+
+# File to update version in
+SETUP_FILE="./tools/setup.py"
+
+# Extract current version
+CURRENT_VERSION=$(grep "version=" $SETUP_FILE | sed -E "s/.*version='([0-9]+)\.([0-9]+)\.([0-9]+)'.*/\1.\2.\3/")
 MAJOR=$(echo $CURRENT_VERSION | cut -d. -f1)
 MINOR=$(echo $CURRENT_VERSION | cut -d. -f2)
 PATCH=$(echo $CURRENT_VERSION | cut -d. -f3)
@@ -31,13 +37,11 @@ fi
 NEW_VERSION="$NEW_MAJOR.$NEW_MINOR.$NEW_PATCH"
 TAG="v$NEW_VERSION"
 
-echo "📦 Updating version to $NEW_VERSION..."
-
-# Update version in setup.py
-sed -i '' "s/version='.*'/version='$NEW_VERSION'/" setup.py
+echo "📦 Updating version to $NEW_VERSION in $SETUP_FILE..."
+sed -i '' "s/version='.*'/version='$NEW_VERSION'/" $SETUP_FILE
 
 echo "📄 Committing changes..."
-git add setup.py README.md CHANGELOG.md .env.example ssh_manager/
+git add $SETUP_FILE README.md CHANGELOG.md .env.example ssh_manager/
 git commit -m "Release $TAG"
 
 echo "🏷️  Creating tag $TAG"

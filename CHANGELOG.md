@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.5.0] - 2025-03-12
+### Changed
+- Moved `setup.py` and `release.sh` into a new `tools/` directory
+- Updated `release.sh` to work from inside the `tools/` directory and handle relative paths
+- README updated to reflect new location of developer tools
+- Improved script robustness when running from subdirectories
+
 ## [0.3.2] - 2025-03-12
 ### Added
 - Section in README explaining how to upgrade to a newer version via pip or pipx
