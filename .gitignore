@@ -1,5 +1,28 @@
-.env
+# SSH Manager Git Ignore
+
+# Python
 __pycache__/
 *.pyc
+*.pyo
+*.egg-info/
+
+# Environment and secrets
+.env
+.env.*
+
+# SSH keys (DO NOT TRACK)
+*.pem
+*.pub
+*.key
+id_rsa*
+id_ed25519*
+
+# VSCode / Editor files
+.vscode/
+*.swp
+*~
+
+# Archives
 *.zip
+*.tar.gz
 export/
