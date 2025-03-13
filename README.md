@@ -1,5 +1,8 @@
 # ssh-manager
 
+> ⚠️ **Note**: *At 3pm I had a coffee thinking it was decaf and instead... at 2am I was still programming this... I'm not a programmer but the idea seemed good to me and so I got some AI to help me ☕🤖*
+
+
 ![GitHub release](https://img.shields.io/github/v/release/manuelpiacenti/ssh-manager?include_prereleases&label=Latest%20Version)
 [![License: GPLv3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
 
